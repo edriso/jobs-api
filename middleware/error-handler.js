@@ -24,6 +24,11 @@ const errorHandlerMiddleware = (err, req, res, next) => {
       .join(', ');
   }
 
+  if (err.name === 'CastError') {
+    customError.statusCode = 404;
+    customError.msg = `no item found with id: ${err.value}`;
+  }
+
   if (err.code && err.code === 11000) {
     customError.statusCode = StatusCodes.BAD_REQUEST;
     customError.msg = `Duplicate value entered for ${Object.keys(
