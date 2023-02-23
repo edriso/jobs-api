@@ -29,9 +29,9 @@ An API where only authenticated users can make jobs CRUD operations
   - If correct, generate token
   - Send response with token
 - Handling Validation Errors / Duplicate (Email) / Cast Error
-- Using Security Packages
-  - helmet
+- Using Cors and Some Security Packages
   - cors
+  - helmet
   - xss-clean
   - express-rate-limit
 - APImatic / Swagger UI for the docs
