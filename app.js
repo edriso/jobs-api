@@ -1,8 +1,8 @@
 require('dotenv').config();
 require('express-async-errors');
+const cors = require('cors');
 // extra security packages
 const helmet = require('helmet');
-const cors = require('cors');
 const xss = require('xss-clean');
 const rateLimiter = require('express-rate-limit');
 
@@ -20,6 +20,10 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 const app = express();
 
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
+app.use(xss());
 app.set('trust proxy', 1);
 app.use(
   rateLimiter({
@@ -29,10 +33,6 @@ app.use(
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   })
 );
-app.use(express.json());
-app.use(helmet());
-app.use(cors());
-app.use(xss());
 
 // connectDB
 const connectDB = require('./db/connect');
